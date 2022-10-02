@@ -7,6 +7,5 @@ public class Ball {
         } else {
             System.out.println("Колобок убежал");
         }
-
     }
 }
