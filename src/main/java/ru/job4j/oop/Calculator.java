@@ -13,15 +13,15 @@ public class Calculator {
     }
 
     public static int minus(int z) {
-        return x - z;
+        return z - x;
     }
 
-    public int divide(int q) {
-        return x * q;
+    public double divide(double q) {
+        return q / x;
     }
 
-    public int sumAllOperation() {
-        return sum(10) + multiply(5) + minus(3) + divide(3);
+    public double sumAllOperation(int p) {
+        return sum(p) + multiply(p) + minus(p) + divide(p);
     }
 
     public static void main(String[] args) {
@@ -32,10 +32,8 @@ public class Calculator {
         System.out.println(rsl);
         int resultMinus = minus(3);
         System.out.println(resultMinus);
-        Calculator calculator1 = new Calculator();
-        int resDivide = calculator1.divide(3);
+        double resDivide = calculator.divide(3);
         System.out.println(resDivide);
-        Calculator calculator2 = new Calculator();
-        System.out.println(calculator2.sumAllOperation());
+        System.out.println(calculator.sumAllOperation(7));
     }
 }
