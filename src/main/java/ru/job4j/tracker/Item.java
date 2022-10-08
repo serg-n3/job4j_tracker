@@ -8,6 +8,9 @@ public class Item {
         return id;
     }
 
+    public Item() {
+    }
+
     public Item(String name) {
         this.name = name;
     }
