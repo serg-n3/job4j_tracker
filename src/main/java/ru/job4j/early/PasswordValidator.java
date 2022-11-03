@@ -14,12 +14,12 @@ public class PasswordValidator {
         if (password.equals(password.toLowerCase())) {
             throw new IllegalArgumentException("Password should contain at least one uppercase letter");
         }
-        if (password.toLowerCase().contains("qwerty") || password.toLowerCase().contains("12345")
-                || password.toLowerCase().contains("password")
-                || password.toLowerCase().contains("admin")
-                || password.toLowerCase().contains("user")) {
-            throw new IllegalArgumentException("Password shouldn't contain substrings: qwerty,"
-                    + " 12345, password, admin, user");
+        String[] pass = {"qwerty", "12345", "password", "admin", "user"};
+        for (String arg : pass) {
+            if (password.toLowerCase().contains(arg)) {
+                throw new IllegalArgumentException("Password shouldn't contain substrings: qwerty,"
+                        + " 12345, password, admin, user");
+            }
         }
         char[] text = password.toCharArray();
         boolean special = false;
@@ -28,10 +28,10 @@ public class PasswordValidator {
                 special = true;
                 break;
             }
-            }
-            if (!special) {
-                throw new IllegalArgumentException("Password should contain at least one special symbol");
-            }
+        }
+        if (!special) {
+            throw new IllegalArgumentException("Password should contain at least one special symbol");
+        }
         boolean num = true;
         for (char ch : text) {
             if (Character.isDigit(ch)) {
@@ -39,12 +39,12 @@ public class PasswordValidator {
                 break;
             }
         }
-            if (num) {
-                throw new IllegalArgumentException("Password should contain at least one figure");
-            }
+        if (num) {
+            throw new IllegalArgumentException("Password should contain at least one figure");
+        }
         return password;
-        }
-        }
+    }
+}
 
 
 
