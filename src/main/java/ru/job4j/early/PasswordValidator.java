@@ -1,6 +1,8 @@
 package ru.job4j.early;
 
 public class PasswordValidator {
+    final static String[] PASS = {"qwerty", "12345", "password", "admin", "user"};
+
     public static String validate(String password) {
         if (password == null) {
             throw new IllegalArgumentException("Password can't be null");
@@ -14,8 +16,7 @@ public class PasswordValidator {
         if (password.equals(password.toLowerCase())) {
             throw new IllegalArgumentException("Password should contain at least one uppercase letter");
         }
-        String[] pass = {"qwerty", "12345", "password", "admin", "user"};
-        for (String arg : pass) {
+        for (String arg : PASS) {
             if (password.toLowerCase().contains(arg)) {
                 throw new IllegalArgumentException("Password shouldn't contain substrings: qwerty,"
                         + " 12345, password, admin, user");
