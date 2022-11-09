@@ -7,9 +7,9 @@ public class SingleTracker {
     private SingleTracker() {
     }
 
-    public SingleTracker getSingleTracker() {
+    public static SingleTracker getInstance() {
         if (instance == null) {
-            return new SingleTracker();
+            instance = new SingleTracker();
         }
         return instance;
     }
