@@ -12,10 +12,11 @@ public class UniqueText {
             check.add(orig);
         }
         for (String tex : text) {
-            if (rsl == check.contains(tex)) {
+            if (!check.contains(tex)) {
+                rsl = false;
+
                 break;
             }
-            rsl = false;
         }
         return rsl;
     }
