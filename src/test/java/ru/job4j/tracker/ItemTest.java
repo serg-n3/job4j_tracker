@@ -14,7 +14,7 @@ public class ItemTest {
         List<Item> items = Arrays.asList(
                 new Item(1, "One"),
                 new Item(8, "Eight"),
-                new Item(2, "Two")
+                new Item(2, "T wo")
         );
         Collections.sort(items);
         List<Item> expected = Arrays.asList(
