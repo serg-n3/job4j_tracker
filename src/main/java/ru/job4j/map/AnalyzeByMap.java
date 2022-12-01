@@ -36,10 +36,8 @@ public class AnalyzeByMap {
         int count = 0;
         for (Pupil pupil : pupils) {
             for (Subject obj : pupil.subjects()) {
-                if (map.containsKey(obj.name())) {
-                    map.computeIfPresent(obj.name(), (ker, ver) -> ver + obj.score());
-                }
-                map.putIfAbsent(obj.name(), obj.score());
+                int i = map.getOrDefault(obj.name(), 0);
+                map.put(obj.name(), obj.score() + i);
             }
             count++;
         }
@@ -70,10 +68,8 @@ public class AnalyzeByMap {
         HashMap<String, Integer> map = new HashMap<>();
         for (Pupil pupil : pupils) {
             for (Subject obj : pupil.subjects()) {
-                if (map.containsKey(obj.name())) {
-                    map.computeIfPresent(obj.name(), (ker, ver) -> ver + obj.score());
-                }
-                map.putIfAbsent(obj.name(), obj.score());
+                int i = map.getOrDefault(obj.name(), 0);
+                map.put(obj.name(), obj.score() + i);
             }
         }
         for (String key : map.keySet()) {
