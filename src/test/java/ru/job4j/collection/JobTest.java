@@ -1,7 +1,7 @@
 package ru.job4j.collection;
 
 import org.junit.jupiter.api.Test;
-
+import java.util.Comparator;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,7 +25,6 @@ class JobTest {
         );
         jobs.sort(new JobAscByName());
         assertThat(jobs).isEqualTo(expected);
-
     }
 
     @Test
@@ -44,7 +43,6 @@ class JobTest {
         );
         jobs.sort(new JobDescByName());
         assertThat(jobs).isEqualTo(expected);
-
     }
 
     @Test
@@ -63,7 +61,6 @@ class JobTest {
         );
         jobs.sort(new JobAscByPriority());
         assertThat(jobs).isEqualTo(expected);
-
     }
 
     @Test
@@ -82,7 +79,36 @@ class JobTest {
         );
         jobs.sort(new JobDescByPriority());
         assertThat(jobs).isEqualTo(expected);
+    }
 
+    @Test
+    public void whenCompatorByNameAndPrority() {
+        Comparator<Job> cmpNamePriority = new JobDescByName().thenComparing(new JobDescByPriority());
+        int rsl = cmpNamePriority.compare(
+                new Job("Impl task", 0),
+                new Job("Fix bug", 1)
+        );
+        assertThat(rsl).isLessThan(0);
+    }
+
+    @Test
+    public void whenCompatorByAscNameAndPrority() {
+        Comparator<Job> cmpNamePriority = new JobAscByName().thenComparing(new JobDescByPriority());
+        int rsl = cmpNamePriority.compare(
+                new Job("Impl task", 0),
+                new Job("Fix bug", 1)
+        );
+        assertThat(rsl).isLessThan(4);
+    }
+
+    @Test
+    public void whenCompatorByAscNameAndAscPrority() {
+        Comparator<Job> cmpNamePriority = new JobAscByName().thenComparing(new JobAscByPriority());
+        int rsl = cmpNamePriority.compare(
+                new Job("Impl task", 0),
+                new Job("Fix bug", 1)
+        );
+        assertThat(rsl).isLessThan(4);
     }
 
 }
