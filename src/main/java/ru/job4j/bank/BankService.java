@@ -55,39 +55,33 @@ public class BankService {
     }
 
     /**
-     * метод ищет пользователя по номеру пвспорта
+     * метод ищет пользователя по номеру паспорта
      * @return возвращает пользователя с указанным паспотом
      * или null если такого пользователя нет
      */
     public User findByPassport(String passport) {
-        User result = null;
-        for (User user : users.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                result = user;
-                break;
-            }
-        }
-        return result;
+        return users.keySet()
+                .stream()
+                .filter(s -> s.getPassport().equals(passport))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
-     * Метод позволяет получеть счет пользователя по поспорту и реквезитам
+     * Метод позволяет получеть счет пользователя по паспорту и реквезитам
      * @param requisite реквезиты счета пользователя
      * @return данные о счете если они есть или null
      */
     public Account findByRequisite(String passport, String requisite) {
         User user = findByPassport(passport);
-        Account result = null;
         if (user != null) {
-            List<Account> accounts = users.get(user);
-            for (Account account : accounts) {
-                if (requisite.equals(account.getRequisite())) {
-                    result = account;
-                    break;
-                }
-            }
+            return users.get(user)
+                    .stream()
+                    .filter(s -> s.getRequisite().equals(requisite))
+                    .findFirst()
+                    .orElse(null);
         }
-        return result;
+        return null;
     }
 
     /**
