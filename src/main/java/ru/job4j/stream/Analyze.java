@@ -4,7 +4,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.util.LinkedHashMap;
 
 public class Analyze {
     public static double averageScore(Stream<Pupil> stream) {
@@ -28,7 +27,6 @@ public class Analyze {
                 .stream())
                 .collect(
                         Collectors.groupingBy(Subject::name,
-                                LinkedHashMap::new,
                                 Collectors.averagingDouble(Subject::score)))
                 .entrySet()
                 .stream()
@@ -43,7 +41,7 @@ public class Analyze {
                         .mapToInt(Subject::score)
                         .sum()))
                         .max(Comparator.comparing(Tuple::score))
-                .orElse(new Tuple("we", 0));
+                .orElse(null);
 
     }
 
@@ -52,12 +50,11 @@ public class Analyze {
                         .stream())
                 .collect(
                         Collectors.groupingBy(Subject::name,
-                                LinkedHashMap::new,
                                 Collectors.summingDouble(Subject::score)))
                 .entrySet()
                 .stream()
                 .map(el -> new Tuple(el.getKey(), el.getValue()))
                 .max(Comparator.comparing(Tuple::score))
-                .orElse(new Tuple("we", 0));
+                .orElse(null);
     }
 }
