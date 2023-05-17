@@ -36,8 +36,7 @@ public class AnalyzeByMap {
         int count = 0;
         for (Pupil pupil : pupils) {
             for (Subject obj : pupil.subjects()) {
-                int i = map.getOrDefault(obj.name(), 0);
-                map.put(obj.name(), obj.score() + i);
+                map.merge(obj.name(), obj.score(), (k, v) -> map.getOrDefault(obj.name(), 0) + obj.score());
             }
             count++;
         }
@@ -68,8 +67,7 @@ public class AnalyzeByMap {
         HashMap<String, Integer> map = new HashMap<>();
         for (Pupil pupil : pupils) {
             for (Subject obj : pupil.subjects()) {
-                int i = map.getOrDefault(obj.name(), 0);
-                map.put(obj.name(), obj.score() + i);
+                map.merge(obj.name(), obj.score(), (k, v) -> map.getOrDefault(obj.name(), 0) + obj.score());
             }
         }
         for (String key : map.keySet()) {
