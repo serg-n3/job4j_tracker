@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class JobTest {
+class Job1Test {
 
     @Test
     public void whenComparatorAscByName() {
