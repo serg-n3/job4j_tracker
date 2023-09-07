@@ -1,0 +1,15 @@
+2023-09-06 20:00:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "DATABASECHANGELOGLOCK" not found (this database is empty); SQL statement:
+SELECT COUNT(*) FROM DATABASECHANGELOGLOCK [42104-214]
+2023-09-06 20:52:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "ITEMSWHERE" не найдена
+Table "ITEMSWHERE" not found; SQL statement:
+SELECT * FROM itemsWHERE name = ?; [42102-214]
+2023-09-07 15:20:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "TRACKER" не найдена
+Table "TRACKER" not found; SQL statement:
+SELECT * FROM tracker WHERE id = ? [42102-214]
+2023-09-07 16:17:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "ITEMSWHERE" не найдена
+Table "ITEMSWHERE" not found; SQL statement:
+SELECT * FROM itemsWHERE name = ?; [42102-214]

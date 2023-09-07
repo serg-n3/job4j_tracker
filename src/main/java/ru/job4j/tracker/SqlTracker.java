@@ -67,12 +67,13 @@ public class SqlTracker implements Store {
     @Override
     public boolean replace(int id, Item item) {
         boolean rsl = true;
+        item.setId(id);
         try (PreparedStatement statement = cn.prepareStatement(
-                "UPDATE items SET id = ? WHERE id = ?;")) {
-            statement.setInt(1, id);
+                "UPDATE items SET name = ? WHERE id = ?;")) {
+            statement.setString(1, item.getName());
             statement.setInt(2, item.getId());
             statement.execute();
-            if (statement.getUpdateCount() > 0) {
+            if (statement.getUpdateCount() == 0) {
                 rsl = false;
             }
         } catch (SQLException e) {
@@ -83,13 +84,13 @@ public class SqlTracker implements Store {
 
     @Override
     public boolean delete(int id) {
-        boolean rsl = true;
+        boolean rsl = false;
         try (PreparedStatement statement =
                 cn.prepareStatement("DELETE FROM items WHERE id = ?;")) {
             statement.setInt(1, id);
             statement.execute();
-            if (statement.getUpdateCount() > 0) {
-                rsl = false;
+            if (statement.execute()) {
+                rsl = true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -124,8 +125,7 @@ public class SqlTracker implements Store {
     public List<Item> findByName(String key) {
         List<Item> itemList = new ArrayList<>();
         try (PreparedStatement statement =
-                cn.prepareStatement("SELECT * FROM items"
-                         + "WHERE name = ?;")) {
+                cn.prepareStatement("SELECT * FROM items WHERE name = ?;")) {
             statement.setString(1, key);
             statement.execute();
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -148,23 +148,20 @@ public class SqlTracker implements Store {
     @Override
     public Item findById(int id) {
         Item item = new Item();
-        try (PreparedStatement statement = cn.prepareStatement(
-                "SELECT * FROM items WHERE id = ?;")) {
+        try (PreparedStatement statement = cn.prepareStatement("SELECT * FROM items WHERE id = ?")) {
             statement.setInt(1, id);
-            statement.execute();
             try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    item.setName(resultSet.getString("name"));
+                if (resultSet.next()) {
                     item.setId(resultSet.getInt("id"));
-                    Timestamp timestamp  = resultSet.getTimestamp("created");
-                    LocalDateTime localDateTime = timestamp.toLocalDateTime();
-                    item.setCreated(localDateTime);
+                    item.setName(resultSet.getString("name"));
+                } else {
+                    return null;
                 }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return item;
+    }
 
     }
-}
