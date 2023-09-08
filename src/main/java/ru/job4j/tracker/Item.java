@@ -9,7 +9,7 @@ public class Item implements Comparable<Item> {
     private String name;
 
     private LocalDateTime created = LocalDateTime.now();
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm");
 
     public Item() {
     }
@@ -21,6 +21,7 @@ public class Item implements Comparable<Item> {
     public Item(int id, String name) {
         this.id = id;
         this.name = name;
+
     }
 
     public int getId() {
@@ -59,19 +60,20 @@ public class Item implements Comparable<Item> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
+        if (this == o)  {
             return true;
         }
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
         Item item = (Item) o;
-        return id == item.id && Objects.equals(name, item.name);
+        return id == item.id && Objects.equals(name, item.name) && Objects.equals(created, item.created);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, created);
     }
+
 }
 
