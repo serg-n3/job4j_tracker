@@ -111,7 +111,6 @@ public class SqlTrackerTest {
         tracker.add(first);
         tracker.add(second);
         assertThat(tracker.findById(first.getId())).isEqualTo(first);
-
     }
 
 }

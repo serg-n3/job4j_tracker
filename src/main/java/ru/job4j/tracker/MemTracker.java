@@ -54,13 +54,12 @@ public class MemTracker implements Store {
         return check;
     }
 
-    public boolean delete(int id) {
+    public void delete(int id) {
         int index = index(id);
         boolean rls = index != -1;
         if (rls) {
             items.remove(index);
         }
-        return rls;
     }
 
     @Override
